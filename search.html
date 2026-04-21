@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电池数据检索</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <link href="chat-dialog.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 修改导航栏部分 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand text-success" href="#"><i class="bi bi-battery-charging"></i> 电池数据系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="search.html">电池检索</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="model.html">电池大模型</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 添加一个占位div，防止固定导航栏遮挡内容 -->
+    <div style="height: 60px;"></div>
+
+    <!-- 主要内容区域 -->
+    <div class="container mt-3">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white border-bottom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0 d-flex align-items-center">
+                        <i class="bi bi-search me-2"></i>
+                        电池数据检索
+                    </h2>
+                </div>
+                <p class="text-muted mb-0 mt-2">快速找到您需要的电池数据集</p>
+            </div>
+        </div>
+
+        <!-- 筛选条件 -->
+        <div class="filter-section mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">数据集类型</label>
+                            <select class="form-select">
+                                <option value="">全部</option>
+                                <option value="public">公开数据集</option>
+                                <option value="experimental">实验数据集</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">数据来源</label>
+                            <select class="form-select">
+                                <option value="">全部</option>
+                                <option value="nasa">NASA</option>
+                                <option value="lab">实验室</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters">
+                                高级筛选
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 高级筛选选项 -->
+                    <div class="collapse mt-3" id="advancedFilters">
+                        <div class="row g-3">
+                            <!-- 正极材料 -->
+                            <div class="col-md-4">
+                                <label class="form-label">正极材料</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="LCO">LCO</option>
+                                    <option value="LFP">LFP</option>
+                                    <option value="NCA">NCA</option>
+                                    <option value="NMC">NMC</option>
+                                    <option value="NMC-LCO">NMC-LCO</option>
+                                </select>
+                            </div>
+                            <!-- 负极材料 -->
+                            <div class="col-md-4">
+                                <label class="form-label">负极材料</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="SiO2">SiO2</option>
+                                    <option value="Graphite">Graphite</option>
+                                </select>
+                            </div>
+                            <!-- 测试温度 -->
+                            <div class="col-md-4">
+                                <label class="form-label">测试温度 (°C)</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="0">0</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
+                                    <option value="35">35</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </div>
+                            <!-- 充电协议 -->
+                            <div class="col-md-4">
+                                <label class="form-label">充电协议</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="CC_CV">CC-CV</option>
+                                    <option value="CC">CC</option>
+                                    <option value="CV">CV</option>
+                                    <option value="CP">CP</option>
+                                </select>
+                            </div>
+                            <!-- 放电协议 -->
+                            <div class="col-md-4">
+                                <label class="form-label">放电协议</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="CC_CV">CC-CV</option>
+                                    <option value="CC">CC</option>
+                                    <option value="CV">CV</option>
+                                    <option value="CP">CP</option>
+                                </select>
+                            </div>
+                            <!-- SOC最大值 -->
+                            <div class="col-md-4">
+                                <label class="form-label">最大荷电状态 (SOC_max)</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="60">60%</option>
+                                    <option value="80">80%</option>
+                                    <option value="100">100%</option>
+                                </select>
+                            </div>
+                            <!-- SOC最小值 -->
+                            <div class="col-md-4">
+                                <label class="form-label">最小荷电状态 (SOC_min)</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="0">0%</option>
+                                    <option value="20">20%</option>
+                                    <option value="40">40%</option>
+                                </select>
+                            </div>
+                            <!-- 电池形状尺寸 -->
+                            <div class="col-md-4">
+                                <label class="form-label">电池形状尺寸</label>
+                                <select class="form-select">
+                                    <option value="">请选择</option>
+                                    <option value="18650">18650型电池</option>
+                                    <option value="21700">21700型电池</option>
+                                    <option value="soft_pack">方形软包电池</option>
+                                    <option value="hard_shell">方形硬壳电池</option>
+                                    <option value="button">纽扣电池</option>
+                                    <option value="plate">平板电池</option>
+                                    <option value="solid_state">固态电池</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索结果 -->
+        <div class="search-results">
+            <div class="row">
+                <!-- 搜索结果卡片 -->
+                <div class="col-12">
+                    <div class="card result-card">
+                        <div class="card-body">
+                            <h5 class="card-title">NASA电池循环测试数据集</h5>
+                            <p class="card-text">包含完整的电池循环测试数据，包括充放电曲线、容量衰减等关键指标。适用于电池寿命预测研究。</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="result-metadata">
+                                    <span><i class="bi bi-calendar"></i> 2024-03-20</span>
+                                    <span><i class="bi bi-file-earmark-text"></i> 实验数据</span>
+                                    <span><i class="bi bi-download"></i> 下载次数：128</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="bi bi-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第二个结果示例 -->
+                    <div class="card result-card">
+                        <div class="card-body">
+                            <h5 class="card-title">锂离子电池老化测试数据集</h5>
+                            <p class="card-text">该数据集包含多组锂离子电池在不同温度、充放电条件下的老化测试数据，可用于电池寿命预测和健康状态评估研究。</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="result-metadata">
+                                    <span><i class="bi bi-calendar"></i> 2024-03-18</span>
+                                    <span><i class="bi bi-file-earmark-text"></i> 公开数据</span>
+                                    <span><i class="bi bi-download"></i> 下载次数：256</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="bi bi-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第三个结果示例 -->
+                    <div class="card result-card">
+                        <div class="card-body">
+                            <h5 class="card-title">固态电池性能测试数据集</h5>
+                            <p class="card-text">收录了多种固态电解质材料的电池性能测试数据，包括循环性能、倍率性能等关键参数，适用于固态电池研究。</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="result-metadata">
+                                    <span><i class="bi bi-calendar"></i> 2024-03-15</span>
+                                    <span><i class="bi bi-file-earmark-text"></i> 实验数据</span>
+                                    <span><i class="bi bi-download"></i> 下载次数：89</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="bi bi-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- 页脚 -->
+ <footer class="footer mt-5 py-3 bg-light">
+    <div class="container text-center">
+        <span class="text-muted">© 2024 电池数据大模型</span>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
